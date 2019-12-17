@@ -1,0 +1,112 @@
+﻿@model Asp.NETMVCCRUD.Models.Empleados
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Esta seguro que desea eliminarlo?</h3>
+<div>
+    <h4>Empleados</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Materno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Materno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaIngreso)
+        </dt>
+
+        <dd>
+            @Html.Label(Model.FechaIngreso.ToShortDateString())
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IngresoBase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IngresoBase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeduccionDesayuno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeduccionDesayuno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeduccionAhorro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeduccionAhorro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Activo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+
+        <dd>
+            @if (@Model.Role == 1)
+            {
+                <label>Administrativo</label>
+            }
+            else
+            {
+                <label>Empleado</label>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Regresar", "Index")
+        </div>
+    }
+</div>

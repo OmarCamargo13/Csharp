@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MvcCRUDDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="ArticuloID" />
+          </Key>
+          <Property Name="ArticuloID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="50" />
+          <Property Name="Precio" Type="float" Nullable="false" />
+          <Property Name="Existencia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+          </Key>
+          <Property Name="EmpleadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Paterno" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Materno" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="IngresoBase" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeduccionDesayuno" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeduccionAhorro" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="Password" Type="varchar(max)" Nullable="false" />
+          <Property Name="Email" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Nominas">
+          <Key>
+            <PropertyRef Name="NominaID" />
+          </Key>
+          <Property Name="NominaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmpleadoID" Type="int" Nullable="false" />
+          <Property Name="IngresoBase" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeduccionDesayuno" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DeduccionAhorro" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="FechaNomina" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Nominas_Empleados">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="1" />
+          <End Role="Nominas" Type="Self.Nominas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoID" />
+            </Principal>
+            <Dependent Role="Nominas">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_CrearNomina" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="MvcCRUDDBModelStoreContainer">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nominas" EntityType="Self.Nominas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Nominas_Empleados" Association="Self.FK_Nominas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Nominas" EntitySet="Nominas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MvcCRUDDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MvcCRUDDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulos" EntityType="MvcCRUDDBModel.Articulos" />
+          <EntitySet Name="Empleados" EntityType="MvcCRUDDBModel.Empleados" />
+          <EntitySet Name="Nominas" EntityType="MvcCRUDDBModel.Nominas" />
+          <AssociationSet Name="FK_Nominas_Empleados" Association="MvcCRUDDBModel.FK_Nominas_Empleados">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Nominas" EntitySet="Nominas" />
+          </AssociationSet>
+          <FunctionImport Name="sp_CrearNomina" />
+        </EntityContainer>
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="ArticuloID" />
+          </Key>
+          <Property Name="ArticuloID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Double" Nullable="false" />
+          <Property Name="Existencia" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="EmpleadoID" />
+          </Key>
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Paterno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Materno" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="FechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IngresoBase" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DeduccionDesayuno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DeduccionAhorro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Nominas" Relationship="MvcCRUDDBModel.FK_Nominas_Empleados" FromRole="Empleados" ToRole="Nominas" />
+        </EntityType>
+        <EntityType Name="Nominas">
+          <Key>
+            <PropertyRef Name="NominaID" />
+          </Key>
+          <Property Name="NominaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmpleadoID" Type="Int32" Nullable="false" />
+          <Property Name="IngresoBase" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DeduccionDesayuno" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DeduccionAhorro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="FechaNomina" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Empleados" Relationship="MvcCRUDDBModel.FK_Nominas_Empleados" FromRole="Nominas" ToRole="Empleados" />
+        </EntityType>
+        <Association Name="FK_Nominas_Empleados">
+          <End Type="MvcCRUDDBModel.Empleados" Role="Empleados" Multiplicity="1" />
+          <End Type="MvcCRUDDBModel.Nominas" Role="Nominas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="EmpleadoID" />
+            </Principal>
+            <Dependent Role="Nominas">
+              <PropertyRef Name="EmpleadoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MvcCRUDDBModelStoreContainer" CdmEntityContainer="MvcCRUDDBEntities">
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="MvcCRUDDBModel.Articulos">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ArticuloID" ColumnName="ArticuloID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="MvcCRUDDBModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
+                <ScalarProperty Name="DeduccionAhorro" ColumnName="DeduccionAhorro" />
+                <ScalarProperty Name="DeduccionDesayuno" ColumnName="DeduccionDesayuno" />
+                <ScalarProperty Name="IngresoBase" ColumnName="IngresoBase" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="Materno" ColumnName="Materno" />
+                <ScalarProperty Name="Paterno" ColumnName="Paterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nominas">
+            <EntityTypeMapping TypeName="MvcCRUDDBModel.Nominas">
+              <MappingFragment StoreEntitySet="Nominas">
+                <ScalarProperty Name="FechaNomina" ColumnName="FechaNomina" />
+                <ScalarProperty Name="DeduccionAhorro" ColumnName="DeduccionAhorro" />
+                <ScalarProperty Name="DeduccionDesayuno" ColumnName="DeduccionDesayuno" />
+                <ScalarProperty Name="IngresoBase" ColumnName="IngresoBase" />
+                <ScalarProperty Name="EmpleadoID" ColumnName="EmpleadoID" />
+                <ScalarProperty Name="NominaID" ColumnName="NominaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_CrearNomina" FunctionName="MvcCRUDDBModel.Store.sp_CrearNomina" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

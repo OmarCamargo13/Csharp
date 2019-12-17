@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bienvenido, elija una opción</h2>
+<br />
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-success">@ViewBag.Message</div>
+    }
+}
+<br />
+@Html.ActionLink("Lista de empleados", "Index", "Empleados")
+<br />
+<br />
+@Html.ActionLink("Ver mi historial de nomina", "Index", "Nominas")
+<br />
+<br />
+@Html.ActionLink("Generar Nomina del mes", "GenerarNomina", "Dashboard")
+<br />
+
+

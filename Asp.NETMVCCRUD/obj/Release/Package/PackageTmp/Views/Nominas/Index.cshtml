@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Asp.NETMVCCRUD.Models.Nominas>
+
+@{
+    ViewBag.Title = "Nomina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Listado de Recibos de nomina</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaNomina)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaNomina)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Desglose", "Details", new { id = item.NominaID }) |
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+@Html.ActionLink("Regresar", "Index", "Dashboard")

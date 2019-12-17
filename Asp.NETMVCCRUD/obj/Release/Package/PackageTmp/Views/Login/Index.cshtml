@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+    <div class="container" style="background: rgb(0,15,36);background: linear-gradient(90deg, rgba(0,15,36,1) 22%, rgba(255,0,0,1) 100%);">
+
+        @{
+            if (!string.IsNullOrEmpty(ViewBag.Message))
+            {
+                <div class="alert alert-danger">@ViewBag.Message</div>
+            }
+        }
+
+        @*<form action="~/Login/Login" method="post">
+            <div class="form-group">
+                <label>Email    </label>
+                <input type="text" name="email" value="" />
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="password" value="" />
+            </div>
+            <div class="form-group">
+                <button>Login</button>
+            </div>
+        </form>*@
+
+        <form action="~/Login/Login" method="post" style="width: 100%;max-width: 330px;padding: 15px;margin: 0 auto;">
+            <img class="mb-4" src="~/IMG/goarkus_forblue.png" alt="" }>
+            <h1 class="h3 mb-3 font-weight-normal" style="color:white">Please sign in</h1>
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="text" name="email" value="" class="form-control" placeholder="Email" required="" autofocus="">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" value="" id="password" class="form-control" placeholder="Password" required="">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+        </form>
+
+
+
+    </div>

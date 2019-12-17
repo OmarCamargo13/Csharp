@@ -1,0 +1,90 @@
+﻿@model Asp.NETMVCCRUD.Models.Nominas
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Desglose</h2>
+
+<div>
+    <h4>Nominas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Empleados.Nombre)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Empleados.Nombre)  @Html.DisplayFor(model => model.Empleados.Paterno)  @Html.DisplayFor(model => model.Empleados.Materno)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaNomina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaNomina)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IngresoBase)
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.IngresoBase)
+        </dd>
+        <dt>
+            <label>Total percepciones</label>
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.IngresoBase)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DeduccionDesayuno)
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.DeduccionDesayuno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeduccionAhorro)
+        </dt>
+
+        <dd>
+            $ @Html.DisplayFor(model => model.DeduccionAhorro)
+        </dd>
+        <dt>
+            <label>Total deducciones</label>
+        </dt>
+
+        <dd>
+            @{
+                decimal TD = (@Model.DeduccionAhorro + @Model.DeduccionDesayuno);
+
+            }
+            $ <label>@string.Format("{0:##,###.00}", @TD)</label>
+
+        </dd>
+        <dt>
+            <label>Total</label>
+        </dt>
+
+        <dd>
+            @{
+                decimal TTL =(@Model.IngresoBase - (@Model.DeduccionAhorro + @Model.DeduccionDesayuno));
+
+            }
+            $ <label>@string.Format("{0:##,###.00}", @TTL)</label>
+
+        </dd>
+
+
+
+
+
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Regresar", "Index")
+</p>
